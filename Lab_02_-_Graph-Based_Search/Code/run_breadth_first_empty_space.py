@@ -6,7 +6,9 @@ from grid_search.breadth_first_planner import BreadthFirstPlanner
 # Create the occupancy grid
 # Q1c:
 # Modify the occupancy grid size
-occupancy_grid = OccupancyGrid("Breadth First Search in Empty Space", 10, 10, 0.5)
+#occupancy_grid = OccupancyGrid("Breadth First Search in Empty Space", 10, 10, 0.5)
+
+occupancy_grid = OccupancyGrid("Breadth First Search in Empty Space", 30, 30, 0.5)
 
 # Q1d:
 
@@ -14,6 +16,21 @@ occupancy_grid = OccupancyGrid("Breadth First Search in Empty Space", 10, 10, 0.
 # that a cell is occupied. In this module, we really only deal with the cases
 # where it's a 0 or a 1.
 #occupancy_grid.set_cell(7, 2, 1)
+
+'''
+The algorithm will visit all reachable grids and return that the goal can not be reached
+'''
+# occupancy_grid.set_cell(9, 3, 1)
+# occupancy_grid.set_cell(8, 4, 1)
+# occupancy_grid.set_cell(8, 3, 1)
+# occupancy_grid.set_cell(9, 3, 1)
+# occupancy_grid.set_cell(8, 5, 1)
+# occupancy_grid.set_cell(9, 3, 1)
+# occupancy_grid.set_cell(9, 5, 1)
+# occupancy_grid.set_cell(10, 5, 1)
+# occupancy_grid.set_cell(10, 4, 1)
+# occupancy_grid.set_cell(10, 3, 1)
+
 
 # Create the planner object. This takes in the occupancy grid, which
 # specifies where the robot can go.
@@ -31,8 +48,17 @@ planner.update_graphics_each_iteration(True)
 
 # Q1b:
 # Set the start and end values to the specified 
-start = (0, 0)
-goal = (9, 4)
+start = (0,0)
+goal = (9,4)
+
+'''
+BOTH paths are going in diagonal
+'''
+# start = (1, 1)
+# goal = (3, 5)
+
+# start = (1,7)
+# goal = (8,4)
 
 # Run the planner to work out the path from the start to the goal
 planner.plan(start, goal)

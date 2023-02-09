@@ -28,6 +28,10 @@ class DampedEpsilonGreedyAgent(Agent):
     # Explore with different values for this function and see what happens.
     def _compute_epsilon(self):
         
-        return self._epsilon * math.exp(-0.05 * self.total_number_of_pulls)
+        #NOTE:  set rate of Decay
+        # NOTE: NOT SURE IF IT IS CORRECT
+        # more negative gives higher decay rate (faster to 0 epsilon)
+        decay = -0.05
+        return self._epsilon * math.exp(decay * self.total_number_of_pulls)
             
         

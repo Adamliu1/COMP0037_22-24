@@ -32,7 +32,15 @@ if __name__ == '__main__':
     environment.set_bandit(8, Bandit(0.5, 1))
     environment.set_bandit(9, Bandit(-0.5, 1))
     
-    number_of_steps = 10000
+    # number_of_steps = 10000
+    number_of_steps = 100000
+    '''
+    number_of_steps = 100
+
+
+    NOTE:
+
+    '''
     
     number_of_tries = 50
     
@@ -51,7 +59,18 @@ if __name__ == '__main__':
     # Q4a:
     # Plot the % optimal actions
     percentage_correct_actions = compute_percentage_of_optimal_actions_selected(environment, action_history)
-    
+    plt.figure(1)
+    plt.title("Percentage correct actions")
+    plt.plot(percentage_correct_actions)
+
     # Q4c:
     # Plot the regret curves
     regret = compute_regret(environment, reward_history)
+    plt.figure(2)
+    plt.title("Regert")
+    plt.plot(regret)
+
+    plt.ion()
+    plt.show()
+    plt.pause(0.001)
+    input()

@@ -19,10 +19,23 @@ class GreedyShortestDistancePlanner(PlannerBase):
         # priority p being the Euclidean distance from the cell to
         # the goal.
 
+        # goal_x, goal_y = self.goal.coords()
+        # cell_x, cell_y = cell.coords()
+
+        # dist = sqrt(abs(cell_x-goal_x)**2 + abs(cell_y-goal_y)**2)
+        # self._priority_queue.put((dist, cell))
+
         # Q4b:
         # Change the priority to 10^6-p.
+
+        goal_x, goal_y = self.goal.coords()
+        cell_x, cell_y = cell.coords()
+
+        dist = sqrt(abs(cell_x-goal_x)**2 + abs(cell_y-goal_y)**2)
+        self._priority_queue.put((10**6-dist, cell))     
+
         
-        self._priority_queue.put((0, cell))
+        # self._priority_queue.put((0, cell))
 
     # Check the queue size is zero
     def is_queue_empty(self):

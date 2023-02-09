@@ -19,9 +19,14 @@ from bandits.bandit import BanditEnvironment
 
 def run_bandits(environment, number_of_steps):
 
-    b = 0
-    rewards = np.zeros(1)
-    print(f'bandit = {b}, mean = {np.mean(rewards)}, sigma = {np.std(rewards)}')
+    num_of_bandit = environment.number_of_bandits()
+    for b in range(num_of_bandit):
+        cur_bandit = environment.bandit(b)
+        rewards = np.zeros(1)
+        for i in range(number_of_steps):
+            cur_reward = cur_bandit.pull_arm()
+            rewards = np.append(rewards, [cur_reward])
+        print(f'bandit = {b}, mean = {np.mean(rewards)}, sigma = {np.std(rewards)}')
         
 if __name__ == '__main__':
     
@@ -29,7 +34,7 @@ if __name__ == '__main__':
     # Change to implement four bandits with the mean and
     # covariance specified in the question
     environment = BanditEnvironment(4)
-    
+
     # Add some bandits
     environment.set_bandit(0, Bandit(1, 1))    
     environment.set_bandit(1, Bandit(1, 2))

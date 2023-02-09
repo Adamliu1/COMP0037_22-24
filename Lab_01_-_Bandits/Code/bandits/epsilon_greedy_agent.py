@@ -18,6 +18,16 @@ class EpsilonGreedyAgent(Agent):
     # Change the implementation to use the epsilon greedy algorithm
     def _choose_action(self):
         action = 0
+        action_space = self._environment.action_space
+        p = np.random.random()
+        if p < self._epsilon:
+            # explore
+            action = action_space.sample()
+        else:
+            average_q = np.divide(self.total_reward, self.number_of_pulls)
+            best_action = np.where(average_q == np.amax(average_q))[0]
+            action = best_action[0]
+
         return action
             
         

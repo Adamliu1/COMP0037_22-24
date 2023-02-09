@@ -36,10 +36,14 @@ if __name__ == '__main__':
     
     # Q5b:
     # Change values to see what happens
+    # epsilon = 0.01
+    # NOTE: the higher the epsilon, the more high probability 
+    # of exploration
     epsilon = 0.01
     
     agent = EpsilonGreedyAgent(environment, epsilon)
-    
+
+
     # Step-by-step store of rewards
     reward_history = np.zeros(number_of_steps)
     action_history = np.zeros(number_of_steps)

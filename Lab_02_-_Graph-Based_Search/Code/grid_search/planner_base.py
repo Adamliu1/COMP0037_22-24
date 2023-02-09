@@ -97,6 +97,8 @@ class PlannerBase(object):
         # create a spiral.
 
         # The swapped order video transposed the last four transitions first
+
+        # Origional, anti-clockwise
         self.push_back_candidate_cell_if_valid(cell, cells, 0, -1)
         self.push_back_candidate_cell_if_valid(cell, cells, 1, -1)
         self.push_back_candidate_cell_if_valid(cell, cells, 1, 0)
@@ -106,6 +108,15 @@ class PlannerBase(object):
         self.push_back_candidate_cell_if_valid(cell, cells, -1, 0)
         self.push_back_candidate_cell_if_valid(cell, cells, -1, -1)
 
+        # Clock-wise
+        # self.push_back_candidate_cell_if_valid(cell, cells, 0, 1)
+        # self.push_back_candidate_cell_if_valid(cell, cells, 1, 1)
+        # self.push_back_candidate_cell_if_valid(cell, cells, 1, 0)
+        # self.push_back_candidate_cell_if_valid(cell, cells, 1, -1)
+        # self.push_back_candidate_cell_if_valid(cell, cells, 0, -1)
+        # self.push_back_candidate_cell_if_valid(cell, cells, -1, 1)
+        # self.push_back_candidate_cell_if_valid(cell, cells, -1, 0)
+        # self.push_back_candidate_cell_if_valid(cell, cells, -1, -1)
         return cells
 
     # This helper method checks if the robot, at cell.coords, can move
@@ -242,9 +253,16 @@ class PlannerBase(object):
                
         # Start at the goal and find the parent
         cell = path_end_cell.parent
+        path.number_of_waypoints += 1
 
         # Q2a:
         # Add code to construct the rest of the path
+        while cell.parent:
+            path.waypoints.append(cell)
+            cell = cell.parent
+            path.number_of_waypoints += 1
+
+
 
         # Now mark the cells as being on the path and show them. We do
         # this as a separate step to show going from the start to the goal
@@ -267,6 +285,18 @@ class PlannerBase(object):
 
         # Q2b: For the path, work out the length and the
         # number of cells traversed
+        for idx in range(path.number_of_waypoints-1):
+            cel_a = path.waypoints[idx]
+            cel_b = path.waypoints[idx+1]
+            # calculate distance
+            coor_a = cel_a.coords()
+            coor_b = cel_b.coords()
+            dist = math.dist(coor_a, coor_b)
+            path_cost += dist
+
+        print(f"Total number of cells traveled -> {path.number_of_waypoints}")
+        print(f"Total path cost -> {path_cost}")
+        path.path_travel_cost = path_cost
 
         # Return the path
         return path

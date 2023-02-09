@@ -40,9 +40,11 @@ if __name__ == '__main__':
     # Plot the actions and rewards
 
     plt.figure(1)
+    plt.plot(action_history)
 
     plt.figure(2)
-    
+    plt.plot(reward_history)
+
     plt.ion()
     plt.show()
     plt.pause(0.001)
